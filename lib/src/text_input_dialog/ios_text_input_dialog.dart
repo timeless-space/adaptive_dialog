@@ -17,6 +17,7 @@ class IOSTextInputDialog extends StatefulWidget {
     this.useRootNavigator = true,
     this.onWillPop,
     this.autoSubmit = false,
+    this.cancelAsDefaultAction = true,
   });
   @override
   State<IOSTextInputDialog> createState() => _IOSTextInputDialogState();
@@ -31,6 +32,7 @@ class IOSTextInputDialog extends StatefulWidget {
   final bool useRootNavigator;
   final WillPopCallback? onWillPop;
   final bool autoSubmit;
+  final bool cancelAsDefaultAction;
 }
 
 class _IOSTextInputDialogState extends State<IOSTextInputDialog> {
@@ -170,7 +172,7 @@ class _IOSTextInputDialogState extends State<IOSTextInputDialog> {
         actions: <Widget>[
           CupertinoDialogAction(
             onPressed: cancel,
-            isDefaultAction: true,
+            isDefaultAction: widget.cancelAsDefaultAction,
             child: Text(
               widget.cancelLabel ??
                   MaterialLocalizations.of(context)
@@ -180,6 +182,7 @@ class _IOSTextInputDialogState extends State<IOSTextInputDialog> {
           ),
           CupertinoDialogAction(
             onPressed: submitIfValid,
+            isDefaultAction: !widget.cancelAsDefaultAction,
             child: Text(
               widget.okLabel ?? MaterialLocalizations.of(context).okButtonLabel,
               style: TextStyle(

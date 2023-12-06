@@ -28,6 +28,7 @@ Future<List<String>?> showTextInputDialog({
   bool autoSubmit = false,
   AdaptiveDialogBuilder? builder,
   RouteSettings? routeSettings,
+  bool cancelAsDefaultAction = true,
 }) {
   final theme = Theme.of(context);
   final adaptiveStyle = style ?? AdaptiveDialog.instance.defaultStyle;
@@ -52,6 +53,7 @@ Future<List<String>?> showTextInputDialog({
             useRootNavigator: useRootNavigator,
             onWillPop: onWillPop,
             autoSubmit: autoSubmit,
+            cancelAsDefaultAction: cancelAsDefaultAction,
           );
           return builder == null ? dialog : builder(context, dialog);
         },
